@@ -16,10 +16,10 @@ public class Writer implements Runnable {
     @Override
     public void run() {
 
-        Random random = new Random();
+        Random random = new Random(666);
         for (int i = 0; i < 10; i++) {
             book.addToBook(random.nextInt());
         }
-        book.setFinished(true);
+//        book.setFinished(true);
     }
 }

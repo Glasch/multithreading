@@ -6,7 +6,7 @@ package com.glasch.multithreading.trytoread;
  */
 public class Reader implements Runnable{
     Book book;
-    private  int readsCount = 0;
+    private  int total = 0;
 
     public Reader(Book book) {
         this.book = book;
@@ -14,13 +14,12 @@ public class Reader implements Runnable{
 
     @Override
     public void run() {
-        while (!book.getFinished()){
-            readsCount++;
-            book.sum();
+        for (int i = 0; i < 100; i++) {
+            total += book.sum();
         }
     }
 
-    public int getReadsCount() {
-        return readsCount;
+    public int getTotal() {
+        return total;
     }
 }

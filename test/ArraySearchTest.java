@@ -2,9 +2,7 @@ import com.glasch.multithreading.ArraySearcher;
 import com.glasch.multithreading.TestDataGenerator;
 import com.glasch.multithreading.count.CountRunner;
 import com.glasch.multithreading.count.Counter;
-import com.glasch.multithreading.trytoread.Book;
-import com.glasch.multithreading.trytoread.Reader;
-import com.glasch.multithreading.trytoread.Writer;
+import com.glasch.multithreading.trytoread.*;
 import junit.framework.TestCase;
 
 import java.util.ArrayList;
@@ -76,9 +74,17 @@ public class ArraySearchTest extends TestCase {
 
     }
 
-    public void testBook(){
+    public void testBookSync(){
+        Book book = new BookSynchronized();
+        _testBook(book);
+    }
 
-        Book book = new Book();
+    public void testBookRWLock(){
+        Book book = new BookRWLock();
+        _testBook(book);
+    }
+
+    private void _testBook(Book book) {
         ArrayList<Thread> threads = new ArrayList<>();
         ArrayList<Reader> readers = new ArrayList<>();
         Writer writer = new Writer(book);
@@ -103,8 +109,7 @@ public class ArraySearchTest extends TestCase {
             }
         }
         for (Reader reader : readers) {
-            System.out.println(reader.getReadsCount());
+            System.out.println(reader.getTotal());
         }
-
     }
 }
